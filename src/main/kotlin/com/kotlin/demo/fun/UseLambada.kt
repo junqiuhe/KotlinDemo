@@ -1,5 +1,7 @@
 package com.kotlin.demo.`fun`
 
+import java.lang.StringBuilder
+
 /**
  * Project Name：KotlinDemo
  * Created by hejunqiu on 2019/7/26 10:28
@@ -196,10 +198,10 @@ class HTML {
  * 带有接收者的函数字面量 A.(B) -> C
  *
  */
-fun html(params1: String, params2: String, method: HTML.(String, String) -> Unit): HTML {
+fun html(params1: String, params2: String, callback: HTML.(String, String) -> Unit): HTML {
     val html = HTML()
 
-    html.method(params1, params2)
+    html.callback(params1, params2)
 
     return html
 }
@@ -222,4 +224,45 @@ fun main(array: Array<String>) {
     1.sum(2)
 
     useHtml()
+
+    useHtml1("Jackson")
+
+    test { println("hello world") }
+
+    val string = "1"
+    val number = string.run {
+        this.toInt()
+    }
+    println(number)
+
+    val appendString = with(StringBuilder()) {
+        append("hello")
+        append(" ")
+        append("world")
+
+        this
+    }
+    println(appendString)
+}
+
+class HTML1 {
+    fun body(name: String) {
+        println(name)
+    }
+}
+
+fun html1(init: HTML1.() -> Unit): HTML1 {
+    val html = HTML1()
+    html.init()
+    return html
+}
+
+fun useHtml1(param: String) {
+    html1 {
+        body(param)
+    }
+}
+
+fun test(params: () -> Unit) {
+    params()
 }
