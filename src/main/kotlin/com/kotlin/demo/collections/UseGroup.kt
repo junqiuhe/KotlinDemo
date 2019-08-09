@@ -26,5 +26,32 @@ fun main(array: Array<String>) {
     numbers = listOf("three", "four", "five", "one", "two")
     println(numbers.groupBy { it.length > 3 })
 
+    /**
+     * groupingBy返回一个Grouping类型的实例，
+     * 支持以下几个操作：
+     *      eachCount.
+     *      fold / reduce
+     *      aggregate
+     */
     println(numbers.groupingBy { it.first() }.eachCount())
+
+    val result = numbers.groupingBy { it.first() }.reduce { key: Char, accumulator: String, element: String ->
+        println("key: $key, accumulator: $accumulator, element: $element")
+        accumulator + element
+    }
+
+    println(result)
+
+    calCharCount()
+}
+
+/**
+ * 统计一个字符串中字符重复的次数
+ */
+private fun calCharCount() {
+    val string = "hnsidhafdnsfasdancffdfsiooooo"
+
+    string.groupBy { it }.forEach { key, values ->
+        println("$key counts : ${values.size}")
+    }
 }
