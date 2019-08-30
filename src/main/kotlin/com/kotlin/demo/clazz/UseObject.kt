@@ -14,7 +14,7 @@ package com.kotlin.demo.clazz.obj
  * 在Kotlin中， 利用 “对象表达式” 和 对象声明
  *
  * 对象表达式：
- * window.addMouseListener(object : MouseAdapter(){
+ * window.addMouseListener(object : MouseAdapter(){  ---> 对象表达式。
  *
  *      override fun mouseClicked(e: MouseEvent){...}
  *
@@ -24,7 +24,6 @@ package com.kotlin.demo.clazz.obj
  */
 
 // 对象表达式------------------------------------
-
 open class A(x: Int) {
     open val y: Int = x
 }
@@ -41,9 +40,13 @@ val ab: A = object : A(1), B {
 fun main(array: Array<String>) {
     println(ab.y)
 
-    /**
-     * 如果只需要一个对象可以如此写。
-     */
+    useObject()
+}
+
+/**
+ * 任何时候，如果我们只需要一个对象，并不需要特殊超类型，可以像如下这么写。
+ */
+fun useObject(){
     val adHot = object {
         var x: Int = 0
         var y: Int = 0
